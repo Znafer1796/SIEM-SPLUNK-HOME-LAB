@@ -32,7 +32,8 @@ The intended workflow is to forward relevant OPNsense logs to Splunk, search the
 The exact network interfaces, IP addressing, routing, and log transport settings will be documented alongside the implementation evidence.
 
 
-<img width="773" height="533" alt="{2C41A9AA-5ECA-42EA-875E-09C4FB5BBC04}" src="https://github.com/user-attachments/assets/0020dc63-395d-4a97-b98d-fc2eb3330e65" />
+<img width="1510" height="1041" alt="image" src="https://github.com/user-attachments/assets/e9c6ce62-4944-48a9-bc98-088cbf4dd10a" />
+
 
 ## Implementation Plan
 
