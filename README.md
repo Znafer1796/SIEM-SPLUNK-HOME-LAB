@@ -1,97 +1,100 @@
-# Splunk SIEM Home Lab
+# SIEM Splunk Home Lab
 
-A hands-on Security Information and Event Management (SIEM) project focused on centralized firewall log collection, network security monitoring, and security event investigation.
+Dự án thực hành **Hệ thống quản lý thông tin và sự kiện an toàn thông tin (SIEM)**, tập trung vào thu thập log tập trung từ firewall, giám sát an ninh mạng và điều tra sự kiện bảo mật.
 
-## Overview
+## Tổng quan
 
-This project explores how a SIEM solution can be deployed in a virtualized environment to collect and analyze firewall logs.
+Dự án tìm hiểu cách triển khai giải pháp SIEM trong môi trường máy ảo nhằm thu thập, tìm kiếm và phân tích log từ firewall.
 
-The lab uses Splunk Enterprise on Windows 10, OPNsense as the firewall, and Kali Linux as a testing machine. VMware virtual networking provides the environment for connectivity and controlled security testing.
+Mô hình lab sử dụng Splunk Enterprise chạy trên Windows 10, OPNsense làm firewall và Kali Linux làm máy kiểm thử. Hệ thống mạng ảo VMware cung cấp môi trường kết nối và thực hiện các bài kiểm thử bảo mật có kiểm soát.
 
-The main goal is to understand the log collection pipeline and develop practical skills relevant to Blue Team operations and Security Operations Center (SOC) workflows.
+Mục tiêu chính là tìm hiểu quy trình thu thập log, phân tích sự kiện và phát triển các kỹ năng thực hành liên quan đến Blue Team và quy trình vận hành của Trung tâm Điều hành An ninh mạng (SOC).
 
-## Objectives
+## Mục tiêu dự án
 
-- Deploy Splunk Enterprise on Windows 10.
-- Configure OPNsense firewall logging and log forwarding.
-- Investigate collected logs using Splunk Search Processing Language (SPL).
-- Generate controlled network traffic from Kali Linux.
-- Correlate test activities with available firewall logs.
-- Document the lab architecture, configuration, and investigation findings.
+- Triển khai Splunk Enterprise trên Windows 10.
+- Cấu hình OPNsense ghi log firewall và chuyển tiếp log đến Splunk.
+- Phân tích sự kiện thu thập được bằng Splunk Search Processing Language (SPL).
+- Tạo lưu lượng mạng có kiểm soát từ Kali Linux để phục vụ kiểm thử.
+- Đối chiếu hoạt động kiểm thử với các log firewall tương ứng.
+- Ghi lại kiến trúc hệ thống, quá trình cấu hình và kết quả điều tra.
 
-## Architecture
+## Kiến trúc hệ thống
 
-The lab consists of three primary virtual machines:
+Lab bao gồm ba máy ảo chính:
 
-- **Windows 10:** Runs Splunk Enterprise for log ingestion and investigation.
-- **OPNsense:** Enforces network policies and generates firewall logs.
-- **Kali Linux:** Generates controlled traffic for monitoring and testing.
+- **Windows 10:** Chạy Splunk Enterprise, thực hiện tiếp nhận, tìm kiếm và phân tích log.
+- **OPNsense:** Thực thi các chính sách firewall và tạo log lưu lượng mạng.
+- **Kali Linux:** Tạo lưu lượng mạng có kiểm soát để kiểm thử và giám sát.
 
-The intended workflow is to forward relevant OPNsense logs to Splunk, search the collected events, and investigate activity generated during lab testing.
+Quy trình hoạt động dự kiến là chuyển tiếp log phù hợp từ OPNsense đến Splunk, tìm kiếm các sự kiện đã thu thập và điều tra hoạt động phát sinh trong quá trình kiểm thử.
 
-The exact network interfaces, IP addressing, routing, and log transport settings will be documented alongside the implementation evidence.
+Cấu hình cụ thể của các giao diện mạng, địa chỉ IP, định tuyến và giao thức truyền log được trình bày cùng với bằng chứng triển khai thực tế.
 
+![Sơ đồ kiến trúc hệ thống SIEM Splunk Home Lab](https://github.com/user-attachments/assets/e9c6ce62-4944-48a9-bc98-088cbf4dd10a)
 
-<img width="1510" height="1041" alt="image" src="https://github.com/user-attachments/assets/e9c6ce62-4944-48a9-bc98-088cbf4dd10a" />
+## Kế hoạch triển khai
 
+### 1. Cấu hình mạng ảo
 
-## Implementation Plan
+- Cấu hình các card mạng ảo cho từng máy.
+- Kiểm tra kết nối giữa các thành phần cần thiết trong lab.
+- Ghi lại cấu hình mạng VMnet2 và NAT.
 
-### 1. Virtual Network Configuration
-- Configure the virtual network adapters.
-- Verify connectivity between the required lab components.
-- Document the VMnet2 and NAT network configuration.
+### 2. Cấu hình OPNsense
 
-### 2. OPNsense Configuration
-- Review firewall interfaces and network rules.
-- Configure the relevant logging settings.
-- Set up log forwarding to the Splunk receiver, where applicable.
+- Kiểm tra các giao diện mạng và luật firewall.
+- Cấu hình các thiết lập ghi log cần thiết.
+- Thiết lập chuyển tiếp log đến Splunk Receiver khi phù hợp.
 
-### 3. Splunk Deployment
-- Install Splunk Enterprise on Windows 10.
-- Configure the appropriate receiving input.
-- Verify connectivity and incoming log data.
+### 3. Triển khai Splunk
 
-### 4. Log Collection and Investigation
-- Search for incoming OPNsense events.
-- Inspect available fields and event timestamps.
-- Develop SPL searches to filter and summarize relevant events.
+- Cài đặt Splunk Enterprise trên Windows 10.
+- Cấu hình cổng tiếp nhận log phù hợp.
+- Kiểm tra kết nối và xác nhận dữ liệu log được gửi đến Splunk.
 
-### 5. Controlled Security Testing
-- Generate authorized test traffic from Kali Linux.
-- Review corresponding firewall events.
-- Record observations and investigate the resulting logs.
+### 4. Thu thập và điều tra log
 
-## Log Analysis
+- Tìm kiếm các sự kiện OPNsense được gửi đến Splunk.
+- Kiểm tra các trường dữ liệu và dấu thời gian của sự kiện.
+- Xây dựng truy vấn SPL để lọc, phân loại và tổng hợp các sự kiện liên quan.
 
-This section will contain verified SPL queries and investigation examples.
+### 5. Kiểm thử bảo mật có kiểm soát
 
-Each investigation will document:
+- Tạo lưu lượng kiểm thử được cho phép từ Kali Linux.
+- Kiểm tra các sự kiện firewall tương ứng.
+- Ghi nhận kết quả, phân tích log và đánh giá những gì dữ liệu thu thập được thể hiện.
 
-- **Objective:** The behavior or event being investigated.
-- **Method:** The test procedure and SPL query.
-- **Evidence:** The relevant events observed in Splunk.
-- **Analysis:** What the available logs indicate.
-- **Limitations:** What cannot be concluded from the collected data.
+## Phân tích log
 
-## Skills Developed
+Phần này trình bày các truy vấn SPL đã được kiểm chứng và những tình huống điều tra sự kiện cụ thể.
 
-- SIEM deployment and basic administration
-- Firewall configuration and logging
-- Centralized log collection
-- SPL-based event searching
-- Virtual network troubleshooting
-- Security event investigation
-- Technical documentation and evidence collection
+Mỗi tình huống phân tích bao gồm:
 
-## Future Improvements
+- **Mục tiêu:** Hành vi hoặc sự kiện cần điều tra.
+- **Phương pháp:** Quy trình kiểm thử và truy vấn SPL được sử dụng.
+- **Bằng chứng:** Các sự kiện liên quan được ghi nhận trên Splunk.
+- **Phân tích:** Ý nghĩa của các trường log và những gì có thể kết luận từ dữ liệu.
+- **Giới hạn:** Những nội dung chưa thể xác định chắc chắn từ dữ liệu hiện có.
 
-- Integrate Windows security logs and Sysmon telemetry.
-- Build dashboards for firewall activity.
-- Develop alerting rules for selected security events.
-- Expand log analysis and detection use cases.
-- Document investigation workflows relevant to SOC operations.
+## Kỹ năng thực hành
 
-## Disclaimer
+- Triển khai và quản trị SIEM ở mức cơ bản.
+- Cấu hình firewall và hệ thống ghi log.
+- Thu thập log tập trung.
+- Tìm kiếm và phân tích sự kiện bằng SPL.
+- Khắc phục sự cố mạng ảo.
+- Điều tra sự kiện an toàn thông tin.
+- Viết tài liệu kỹ thuật và thu thập bằng chứng kiểm thử.
 
-This project is intended for educational purposes and authorized testing within a controlled lab environment. Security testing is performed only against systems and networks for which authorization has been granted.
+## Hướng phát triển
+
+- Tích hợp log bảo mật Windows và dữ liệu Sysmon.
+- Xây dựng dashboard giám sát hoạt động firewall.
+- Phát triển các luật cảnh báo cho những sự kiện được lựa chọn.
+- Mở rộng các tình huống phân tích log và phát hiện hành vi đáng ngờ.
+- Xây dựng quy trình điều tra phù hợp với hoạt động SOC.
+
+## Tuyên bố miễn trừ trách nhiệm
+
+Dự án phục vụ mục đích học tập và thực hành trong môi trường lab được kiểm soát. Mọi hoạt động kiểm thử bảo mật chỉ được thực hiện trên các hệ thống và mạng đã được cấp quyền sử dụng hoặc kiểm thử.
